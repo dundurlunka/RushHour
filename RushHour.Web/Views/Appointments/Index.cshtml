@@ -1,0 +1,40 @@
+﻿@model List<AppointmentViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Appointments</h2>
+
+<a class="btn btn-info" asp-controller="Appointments" asp-action="Create">New appointment</a> <br /><br />
+<table class="table table-responsive table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Activities</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (AppointmentViewModel appointment in Model)
+    {
+    <tr>
+        <td>@appointment.Id</td>
+        <td>@appointment.Title</td>
+        <td>@appointment.StartDateTime.ToShortDateString() @appointment.StartDateTime.ToShortTimeString()</td>
+        <td>@appointment.EndDateTime.ToShortDateString() @appointment.EndDateTime.ToShortTimeString()</td>
+        <td>
+            <ul>
+                @foreach (Activity activity in appointment.OwnedActivities)
+                {
+                    <li>@activity.Name</li>
+                }
+            </ul>
+        </td>
+        <td>
+            <a class="btn btn-warning" asp-controller="Appointments" asp-action="Update" asp-route-id="@appointment.Id">Edit</a>
+            <a class="btn btn-danger" asp-controller="Appointments" asp-action="Delete" asp-route-id="@appointment.Id" onclick="return confirm('Are you sure you want to delete this appointment?')">Delete</a>
+        </td>
+    </tr>
+    }
+</table>

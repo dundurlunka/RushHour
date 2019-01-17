@@ -1,0 +1,31 @@
+﻿@model List<ActivityViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Activities</h2>
+
+<a class="btn btn-info" asp-controller="Activities" asp-action="Create">New activity</a> <br /><br />
+<table class="table table-responsive table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Duration</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (ActivityViewModel activity in Model)
+    {
+        <tr>
+            <td>@activity.Id</td>
+            <td>@activity.Name</td>
+            <td>@Math.Floor(activity.Duration / 60m) hours and @(activity.Duration % 60) minutes</td>
+            <td>@activity.Price</td>
+            <td>
+                <a class="btn btn-warning" asp-controller="Activities" asp-action="Update" asp-route-id="@activity.Id">Edit</a>
+                <a class="btn btn-danger" asp-controller="Activities" asp-action="Delete" asp-route-id="@activity.Id" onclick="return confirm('Are you sure you want to delete this activity?')">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

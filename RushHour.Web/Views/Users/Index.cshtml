@@ -1,0 +1,30 @@
+﻿@model List<UserListViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Users</h2>
+
+<table class="table table-responsive table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>E-mail</th>
+        <th>Phone number</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (UserListViewModel user in Model)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>@user.PhoneNumber</td>
+            <td>
+                <a class="btn btn-warning" asp-controller="Users" asp-action="Update" asp-route-id="@user.Id">Edit</a>
+                <a class="btn btn-danger" asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

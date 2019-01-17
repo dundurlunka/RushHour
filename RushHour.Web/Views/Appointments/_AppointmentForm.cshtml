@@ -1,0 +1,32 @@
+﻿@model AppointmentViewModel
+
+<form method="post">
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" type="text" required class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDateTime"></label>
+        <input asp-for="StartDateTime" type="text" required id="datepickerStartDate" class="form-control" />
+        <span asp-validation-for="StartDateTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Activities"></label>
+        <select asp-for="Activities" id='multiple-select' multiple='multiple'>
+            @foreach (Activity notOwnedActivity in Model.NotOwnedActivities)
+            {
+                <option value='@notOwnedActivity.Id'>@notOwnedActivity.Name (@notOwnedActivity.Duration minutes)</option>
+            }
+
+            @foreach (Activity ownedActivity in Model.OwnedActivities)
+            {
+                <option selected value='@ownedActivity.Id'>@ownedActivity.Name (@ownedActivity.Duration minutes)</option>
+            }
+        </select>
+    </div>
+
+    <input type="submit" class="btn btn-default" value="Save appointment!" />
+</form>

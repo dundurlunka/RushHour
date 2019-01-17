@@ -1,0 +1,21 @@
+﻿@model ActivityViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <partial name="_ActivityForm" model="Model" />
+    </div>
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/lib/time-input/css/timingfield.css" />
+}
+
+@section Scripts{
+    <script src="~/lib/time-input/js/timingfield.js"></script>
+    <script src="~/lib/time-input/js/initialize.js"></script>
+}

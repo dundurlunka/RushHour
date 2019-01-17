@@ -1,0 +1,15 @@
+﻿@inject UserManager<User> userManager
+@{
+    var userId = userManager.GetUserId(User);
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <li><a asp-controller="Users" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    <li><a asp-controller="Users" asp-action="Update" asp-route-id="@userId"><span>Hello @User.Identity.Name!</span></a></li>
+}
+else
+{
+    <li><a asp-area="" asp-controller="Users" asp-action="Register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+    <li><a asp-area="" asp-controller="Users" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+}
